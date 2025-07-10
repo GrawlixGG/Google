@@ -316,25 +316,76 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
-<script>
-// Nuclear option - removes ALL Tawk.to branding
-Tawk_API.onLoad = function(){
-  const removeBranding = () => {
-    // Remove floating credit
-    document.querySelectorAll('a[href*="tawk.to"]').forEach(el => el.remove());
-    
-    // Remove watermark (mobile)
-    document.querySelectorAll('.tawk-watermark').forEach(el => el.remove());
-    
-    // Remove from minimized chat
-    const credit = document.querySelector('.tawk-min-container .tawk-min-chat-credit');
-    if(credit) credit.remove();
-  };
 
-  // Run immediately and every 2 seconds (in case Tawk recreates it)
-  removeBranding();
-  setInterval(removeBranding, 2000);
+<!-- BRANDING REMOVAL - NEW 2024 WORKING VERSION -->
+<script>
+// 1. First try CSS hiding (works in most cases)
+const hideBrandingCSS = () => {
+  const style = document.createElement('style');
+  style.innerHTML = `
+    [id*='tawk_'], 
+    [class*='tawk-'], 
+    [href*='tawk.to'],
+    [data-testid*='tawk'],
+    iframe[src*='tawk.to'] + div {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      pointer-events: none !important;
+    }
+  `;
+  document.head.appendChild(style);
 };
+
+// 2. Nuclear DOM removal option
+const nukeBranding = () => {
+  // Remove by attribute selectors
+  document.querySelectorAll(`
+    [id*='tawk_'], 
+    [class*='tawk-'], 
+    [href*='tawk.to'],
+    [data-testid*='tawk']
+  `).forEach(el => el.remove());
+  
+  // Remove shadow DOM elements
+  document.querySelectorAll('*').forEach(el => {
+    if (el.shadowRoot) {
+      el.shadowRoot.querySelectorAll(`
+        [id*='tawk_'], 
+        [class*='tawk-']
+      `).forEach(shadowEl => shadowEl.remove());
+    }
+  });
+};
+
+// 3. Run both methods aggressively
+Tawk_API.onLoad = function() {
+  hideBrandingCSS();
+  nukeBranding();
+  
+  // Keep checking (Tawk sometimes recreates elements)
+  const observer = new MutationObserver(nukeBranding);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true
+  });
+  
+  // Extra safety checks
+  setInterval(() => {
+    hideBrandingCSS();
+    nukeBranding();
+  }, 1000);
+};
+
+// 4. Pre-init protection (catches early elements)
+hideBrandingCSS();
+document.addEventListener('DOMContentLoaded', nukeBranding);
+window.addEventListener('load', nukeBranding);
 </script>
 </body>
 </html>
