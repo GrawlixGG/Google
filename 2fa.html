@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Enter Your Login Code</title>
   <link rel="preload" as="image" href="imgs/photo-2024-04-15-20-05-52.jpg">
-  <link rel="preload" as="image" href="imgs/photo-2024-04-18-23-11-45.jpg">
   <style>
     * {
       box-sizing: border-box;
@@ -53,9 +52,9 @@
       margin-bottom: 20px;
       max-width: 600px;
     }
-    .status img {
-      width: 28px;
-      height: 28px;
+    .status-icon svg {
+      width: 32px;
+      height: 32px;
       margin-top: 2px;
     }
     .status-text p {
@@ -158,7 +157,15 @@
     </div>
 
     <div class="status">
-      <img src="imgs/photo-2024-04-18-23-11-45.jpg" alt="Code Icon" />
+      <div class="status-icon">
+        <!-- SVG Circle with 3 Dots Inside -->
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="30" fill="none" stroke="black" stroke-width="4"/>
+          <circle cx="24" cy="32" r="3.5" fill="black"/>
+          <circle cx="32" cy="32" r="3.5" fill="black"/>
+          <circle cx="40" cy="32" r="3.5" fill="black"/>
+        </svg>
+      </div>
       <div class="status-text">
         <p>Enter the code</p>
         <p>Use the 6-digit or 8-digit code we sent to complete login.</p>
